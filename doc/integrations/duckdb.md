@@ -15,12 +15,12 @@ myst:
     description lang=en: Use DuckDB from Jupyter using JupySQL
     keywords: jupyter, sql, jupysql, duckdb, plotting
     property=og:locale: en_US
-    property=og:image: ./img/duckdb.jpg
+    property=og:image: ./img/duckdb-jupyter.jpg
 ---
 
 # DuckDB
 
-![Sample Image](img/duckdb.jpg)
+![Sample Image](img/duckdb-jupyter.jpg)
 
 
 JupySQL integrates with DuckDB so you can run SQL queries in a Jupyter notebook. Jump into any section to learn more!
