@@ -1,0 +1,22 @@
+name: jupysql-dev
+
+channels:
+  - conda-forge
+
+dependencies:
+  - pandas
+  # 03/24/23 this breaks our CI
+  - polars=0.16.14
+  - pyodbc
+  # sql.plot module tests
+  - matplotlib
+
+  - pip:
+    - pytest
+    - pkgmt
+    - twine
+    # tests
+    - duckdb
+    - duckdb-engine
+    # for %%sql --interact
+    - ipywidgets
