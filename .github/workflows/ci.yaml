@@ -27,6 +27,9 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: ${{ matrix.python-version }}
+          mamba-version: "*"
+          channels: conda-forge,defaults
+          channel-priority: true
 
       - name: Lint
         run: |
@@ -48,7 +51,9 @@ jobs:
 
       - name: Install dev dependencies
         run: |
-          conda env update -f extras.dev.yml
+
+          # conda is too slow!
+          mamba env update -f extras.dev.yml
 
       - name: Test with pytest
         run: |
