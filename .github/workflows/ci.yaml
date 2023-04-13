@@ -53,7 +53,7 @@ jobs:
         run: |
 
           # conda is too slow!
-          mamba env update -f extras.dev.yml
+          mamba env update -f extras.dev.yml -n test
 
       - name: Test with pytest
         run: |
