@@ -62,7 +62,7 @@ jobs:
             }}
         env:
           # Increase this value to reset cache if etc/example-environment.yml has not changed
-          CACHE_NUMBER: 3
+          CACHE_NUMBER: 4
         id: cache
 
       - name: Lint
@@ -100,13 +100,13 @@ jobs:
           # eval "$(conda shell.bash hook)"
           # conda activate /home/runner/micromamba-root/envs/test
           # conda is too slow! but mamba takes too long to install!
+          micromamba env
           micromamba update -f extras.dev.yml -n test
 
       - name: Test with pytest
         run: |
 
-          eval "$(conda shell.bash hook)"
-          conda activate /home/runner/micromamba-root/envs/test
+          micromamba activate test
           # ensure we're running sqlalchemy 2
           python -c "import sqlalchemy; assert int(sqlalchemy.__version__.split('.')[0]) == 2"
           # run unit tests
