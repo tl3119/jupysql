@@ -26,6 +26,10 @@ jobs:
 
       - name: Lint
         run: |
+
+          which python
+          conda activate test
+          which python
           python -m pip install --upgrade pip pkgmt
           pkgmt lint
 
