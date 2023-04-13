@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8, 3.9, '3.10', '3.11']
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        # os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -55,7 +55,7 @@ jobs:
       - name: Cache Conda env
         uses: actions/cache@v2
         with:
-          path: /home/runner/micromamba-root/envs
+          path: ${{ env.MAMBA_ROOT_PREFIX }}/envs
           key:
             conda-${{ runner.os }}--${{ runner.arch }}--${{
             steps.get-date.outputs.today }}-${{
@@ -86,7 +86,7 @@ jobs:
           # conda info --envs
           # conda activate /home/runner/micromamba-root/envs/test
           # which python
-          env
+          # env
 
           pip install .
           # check package is importable
@@ -111,6 +111,7 @@ jobs:
           micromamba activate test
           # ensure we're running sqlalchemy 2
           python -c "import sqlalchemy; assert int(sqlalchemy.__version__.split('.')[0]) == 2"
+          # TODO: check we end up with the right python version
           # run unit tests
           # pytest --durations-min=5 --ignore=src/tests/integration
           pytest --help
