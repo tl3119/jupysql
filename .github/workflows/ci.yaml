@@ -65,14 +65,14 @@ jobs:
           CACHE_NUMBER: 4
         id: cache
 
-      - name: Lint
-        run: |
+      # - name: Lint
+      #   run: |
 
-          # which python
-          # conda activate test
-          # which python
-          python -m pip install --upgrade pip pkgmt
-          pkgmt lint
+      #     # which python
+      #     # conda activate test
+      #     # which python
+      #     python -m pip install --upgrade pip pkgmt
+      #     pkgmt lint
 
       # maybe add "pip install ." to the cache as well?
       # but we should ensure we only cache the dependencies and not the package
@@ -101,7 +101,7 @@ jobs:
           # conda activate /home/runner/micromamba-root/envs/test
           # conda is too slow! but mamba takes too long to install!
           micromamba env
-          micromamba update -f extras.dev.yml -n test
+          micromamba install -f extras.dev.yml -n test
 
       - name: Test with pytest
         run: |
