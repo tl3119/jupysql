@@ -18,7 +18,10 @@ jobs:
 
     defaults:
       run:
-        shell: bash -el {0}
+        # setup-miniconda
+        # shell: bash -el {0}
+        # micromamba
+        shell: bash -l {0}
 
     steps:
       - uses: actions/checkout@v2
