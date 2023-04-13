@@ -28,6 +28,35 @@ install_requires = [
     'importlib-metadata;python_version<"3.8"',
 ]
 
+DEV = [
+    "flake8",
+    "pytest",
+    "pandas",
+    "polars==0.16.14",  # 03/24/23 this breaks our CI
+    "invoke",
+    "pkgmt",
+    "twine",
+    # tests
+    "duckdb",
+    "duckdb-engine",
+    "pyodbc",
+    # sql.plot module tests
+    "matplotlib",
+    "black",
+    # for %%sql --interact
+    "ipywidgets",
+]
+
+# dependencies for running integration tests
+INTEGRATION = [
+    "dockerctx",
+    "pyarrow",
+    "psycopg2-binary",
+    "pymysql",
+    "pgspecial==2.0.1",
+    "pyodbc",
+    "snowflake-sqlalchemy",
+]
 
 setup(
     name="jupysql",
@@ -55,4 +84,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
+    extras_require={
+        "dev": DEV,
+        "integration": DEV + INTEGRATION,
+    },
 )
