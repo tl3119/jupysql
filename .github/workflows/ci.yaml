@@ -38,6 +38,7 @@ jobs:
       #     channels: conda-forge,defaults
       #     channel-priority: true
 
+      # TODO: set python version
       - name: Install Conda environment with Micromamba
         uses: mamba-org/provision-with-micromamba@main
         with:
@@ -99,7 +100,7 @@ jobs:
           eval "$(conda shell.bash hook)"
           conda activate /home/runner/micromamba-root/envs/test
           # conda is too slow! but mamba takes too long to install!
-          mamba env update -f extras.dev.yml -n test
+          mamba env update -f extras.dev.yml -n /home/runner/micromamba-root/envs/test
 
       - name: Test with pytest
         run: |
