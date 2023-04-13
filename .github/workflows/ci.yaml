@@ -23,6 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # there is a tradeoff here: adding mamba increases the runtime of this step
+      # e.g on windows and mac it takes ~4mins, on ubuntu ~1m40s
+      # but removing it increases the runtime when installing dependencies since conda
+      # is slow.
       - name: Set up Python ${{ matrix.python-version }}
         uses: conda-incubator/setup-miniconda@v2
         with:

@@ -5,8 +5,6 @@ channels:
 
 dependencies:
   - pandas
-  # 03/24/23 this breaks our CI
-  - polars=0.16.14
   - pyodbc
   # sql.plot module tests
   - matplotlib
@@ -20,3 +18,5 @@ dependencies:
     - duckdb-engine
     # for %%sql --interact
     - ipywidgets
+    # 03/24/23 this breaks our CI
+    - polars=0.16.14
