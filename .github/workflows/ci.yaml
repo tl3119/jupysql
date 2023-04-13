@@ -43,7 +43,7 @@ jobs:
         uses: mamba-org/provision-with-micromamba@main
         with:
           environment-file: deleteme.yml
-          environment-name: test
+          # environment-name: test
 
       - name: Get Date
         id: get-date
@@ -81,9 +81,9 @@ jobs:
         run: |
 
           # which python
-          eval "$(conda shell.bash hook)"
-          conda info --envs
-          conda activate /home/runner/micromamba-root/envs/test
+          # eval "$(conda shell.bash hook)"
+          # conda info --envs
+          # conda activate /home/runner/micromamba-root/envs/test
           # which python
 
           pip install .
@@ -97,8 +97,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
 
-          eval "$(conda shell.bash hook)"
-          conda activate /home/runner/micromamba-root/envs/test
+          # eval "$(conda shell.bash hook)"
+          # conda activate /home/runner/micromamba-root/envs/test
           # conda is too slow! but mamba takes too long to install!
           micromamba update -f extras.dev.yml #-n /home/runner/micromamba-root/envs/test
 
