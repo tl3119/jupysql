@@ -19,4 +19,4 @@ dependencies:
     # for %%sql --interact
     - ipywidgets
     # 03/24/23 this breaks our CI
-    - polars=0.16.14
+    - polars==0.16.14
