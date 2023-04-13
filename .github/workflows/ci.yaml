@@ -64,8 +64,6 @@ jobs:
           CACHE_NUMBER: 3
         id: cache
 
-
-
       - name: Lint
         run: |
 
@@ -75,14 +73,15 @@ jobs:
           python -m pip install --upgrade pip pkgmt
           pkgmt lint
 
-      # maybe add pip install . to the cache as well?
+      # maybe add "pip install ." to the cache as well?
+      # but we should ensure we only cache the dependencies and not the package
+      # source code, otherwise we'll be testing the package in the cache
       - name: Install dependencies
         run: |
 
-
-
           # which python
           eval "$(conda shell.bash hook)"
+          conda info --envs
           conda activate test
           # which python
 
