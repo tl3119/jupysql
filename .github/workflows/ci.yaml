@@ -43,7 +43,7 @@ jobs:
         uses: mamba-org/provision-with-micromamba@main
         with:
           environment-file: deleteme.yml
-          # environment-name: test
+          environment-name: test
 
       - name: Get Date
         id: get-date
