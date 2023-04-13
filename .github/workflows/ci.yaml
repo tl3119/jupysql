@@ -79,6 +79,7 @@ jobs:
       # but we should ensure we only cache the dependencies and not the package
       # source code, otherwise we'll be testing the package in the cache
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
 
           # which python
@@ -87,13 +88,12 @@ jobs:
           # conda activate /home/runner/micromamba-root/envs/test
           # which python
           # env
-
+          # maybe better to use "micromamba run"?
+          micromamba activate test
           pip install .
-          # check package is importable
-          python -c "import sql"
+
           # ensure we upgrade sqlalchemy (pip solver might install sqlalchemy 1.x)
           pip install sqlalchemy -U
-
 
       - name: Install dev dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -104,6 +104,18 @@ jobs:
           # conda is too slow! but mamba takes too long to install!
           micromamba env
           micromamba install -f extras.dev.yml -n test
+
+
+      - name: Install dependencies
+        run: |
+
+          mcromamba activate test
+          pip uninstall jupysql -y
+          pip install .
+
+          # check package is importable
+          python -c "import sql"
+
 
       - name: Test with pytest
         run: |
