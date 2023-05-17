@@ -361,7 +361,7 @@ def cockroach(is_bypass_init=False):
             new_container_name=db_config["docker_ct"]["name"],
             image_name=db_config["docker_ct"]["image"],
             ports=db_config["docker_ct"]["ports"],
-            ready_test=lambda: database_ready(database="cockroach"),
+            ready_test=lambda: database_ready(database="cockroach", timeout=60),
             command=db_config["docker_ct"]["command"],
         ) as container:
             yield container
