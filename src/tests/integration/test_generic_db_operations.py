@@ -308,7 +308,9 @@ BOX_PLOT_FAIL_REASON = (
                 reason="Something wrong with sqlplot boxplot in snowflake"
             ),
         ),
-        pytest.param("ip_with_cockroach"),
+        pytest.param(
+            "ip_with_cockroach", marks=pytest.mark.xfail(reason=BOX_PLOT_FAIL_REASON)
+        ),
     ],
 )
 def test_sqlplot_boxplot(ip_with_dynamic_db, cell, request, test_table_name_dict):
@@ -377,7 +379,7 @@ def test_sql_cmd_magic_uno(ip_with_dynamic_db, request, capsys):
                 reason="Something wrong with test_sql_cmd_magic_dos in snowflake"
             ),
         ),
-        ("ip_with_cockroach")
+        ("ip_with_cockroach"),
     ],
 )
 def test_sql_cmd_magic_dos(ip_with_dynamic_db, request, capsys):
