@@ -59,7 +59,7 @@ These table reflects the compatibility status of JupySQL `>=0.7`
 - CTEs with `%%sql --save NAME` ✅
 - Plotting with `%%sqlplot boxplot` ❌
 - Plotting with `%%sqlplot histogram` ✅
-- Plotting with `ggplot` API ✅ (partial support)
+- Plotting with `ggplot` API ✅ (partially support)
 - Profiling tables with `%sqlcmd profile` ✅
 - Listing tables with `%sqlcmd tables` ✅
 - Listing columns with `%sqlcmd columns` ✅
@@ -85,9 +85,9 @@ These table reflects the compatibility status of JupySQL `>=0.7`
 
 - Running queries with `%%sql` ✅
 - CTEs with `%%sql --save NAME` ✅
-- Plotting with `%%sqlplot boxplot` ✅
-- Plotting with `%%sqlplot histogram` ✅
-- Plotting with `ggplot` API ❓
+- Plotting with `%%sqlplot boxplot` ❌
+- Plotting with `%%sqlplot histogram` ✅ 
+- Plotting with `ggplot` ✅ API (partially support)
 - Profiling tables with `%sqlcmd profile` ✅
 - Listing tables with `%sqlcmd tables` ✅
 - Listing columns with `%sqlcmd columns` ✅
