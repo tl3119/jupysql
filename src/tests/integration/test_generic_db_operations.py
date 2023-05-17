@@ -365,18 +365,18 @@ def test_sql_cmd_magic_uno(ip_with_dynamic_db, request, capsys):
 @pytest.mark.parametrize(
     "ip_with_dynamic_db",
     [
-        # ("ip_with_postgreSQL"),
-        # ("ip_with_mySQL"),
-        # ("ip_with_mariaDB"),
-        # ("ip_with_SQLite"),
-        # ("ip_with_duckDB"),
-        # ("ip_with_MSSQL"),
-        # pytest.param(
-        #     "ip_with_Snowflake",
-        #     marks=pytest.mark.xfail(
-        #         reason="Something wrong with test_sql_cmd_magic_dos in snowflake"
-        #     ),
-        # ),
+        ("ip_with_postgreSQL"),
+        ("ip_with_mySQL"),
+        ("ip_with_mariaDB"),
+        ("ip_with_SQLite"),
+        ("ip_with_duckDB"),
+        ("ip_with_MSSQL"),
+        pytest.param(
+            "ip_with_Snowflake",
+            marks=pytest.mark.xfail(
+                reason="Something wrong with test_sql_cmd_magic_dos in snowflake"
+            ),
+        ),
         ("ip_with_cockroach")
     ],
 )
