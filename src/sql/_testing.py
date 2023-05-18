@@ -316,7 +316,7 @@ def mssql(is_bypass_init=False):
                 "MSSQL_SA_PASSWORD": db_config["password"],
                 "ACCEPT_EULA": "Y",
             },
-            ready_test=lambda: database_ready(database="MSSQL"),
+            ready_test=lambda: database_ready(database="MSSQL", timeout=60),
             healthcheck={
                 "test": "/opt/mssql-tools/bin/sqlcmd "
                 "-U $DB_USER -P $SA_PASSWORD "
