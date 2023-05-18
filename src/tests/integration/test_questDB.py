@@ -7,8 +7,7 @@ import urllib.request
 import requests
 from sql.ggplot import ggplot, aes, geom_histogram, facet_wrap, geom_boxplot
 from matplotlib.testing.decorators import image_comparison, _cleanup_cm
-
-# from sql.connection import CustomConnection, CustomSession
+from sql.connection import CustomConnection, CustomSession
 from IPython.core.error import UsageError
 
 """
@@ -130,7 +129,7 @@ def questdb_container(is_bypass_init=False):
 
 
 @pytest.fixture
-def ip_questdb(diamonds_data, penguins_data, ip_empty, skip_on_live_mode):
+def ip_questdb(diamonds_data, penguins_data, ip_empty):
     """
     Initalizes questdb database container and loads it with data
     """
@@ -587,36 +586,36 @@ def test_sqlplot_not_supported_error(
 
 
 # Utils
-# @pytest.mark.parametrize(
-#     "alias",
-#     [None, "test_alias"],
-# )
-# def test_custom_connection(ip_questdb, alias):
-#     import psycopg as pg
+@pytest.mark.parametrize(
+    "alias",
+    [None, "test_alias"],
+)
+def test_custom_connection(ip_questdb, alias):
+    import psycopg as pg
 
-#     engine = pg.connect(QUESTDB_CONNECTION_STRING)
+    engine = pg.connect(QUESTDB_CONNECTION_STRING)
 
-#     expected_connection_name = "custom_driver"
+    expected_connection_name = "custom_driver"
 
-#     connection = CustomConnection(engine, alias)
+    connection = CustomConnection(engine, alias)
 
-#     assert isinstance(connection, CustomConnection)
-#     assert connection.name is expected_connection_name
-#     assert connection.dialect is expected_connection_name
-#     assert connection.alias is alias
-#     assert len(connection.connections) > 0
-#     assert isinstance(connection.session, CustomSession)
+    assert isinstance(connection, CustomConnection)
+    assert connection.name is expected_connection_name
+    assert connection.dialect is expected_connection_name
+    assert connection.alias is alias
+    assert len(connection.connections) > 0
+    assert isinstance(connection.session, CustomSession)
 
-#     if alias:
-#         stored_connection = connection.connections[alias]
-#     else:
-#         stored_connection = connection.connections[expected_connection_name]
+    if alias:
+        stored_connection = connection.connections[alias]
+    else:
+        stored_connection = connection.connections[expected_connection_name]
 
-#     assert isinstance(stored_connection, CustomConnection)
+    assert isinstance(stored_connection, CustomConnection)
 
 
-# def test_custom_connection_error(ip_questdb):
-#     with pytest.raises(ValueError) as err:
-#         CustomConnection()
+def test_custom_connection_error(ip_questdb):
+    with pytest.raises(ValueError) as err:
+        CustomConnection()
 
-#     assert "Engine cannot be None" in str(err)
+    assert "Engine cannot be None" in str(err)
