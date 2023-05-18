@@ -38,4 +38,4 @@ jobs:
           pip install "sqlalchemy>=2"
       - name: Integration Test
         run:
-          pytest src/tests/integration --verbose --ignore=src/tests/integration/test_questDB.py
+          pytest src/tests/integration --verbose --ignore=src/tests/integration/test_generic_db_operations.py
