@@ -5,6 +5,7 @@ from sqlalchemy import MetaData, create_engine
 from sql import _testing
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
+from sqlalchemy.orm import close_all_sessions
 
 
 def pytest_addoption(parser):
@@ -59,9 +60,11 @@ def drop_table(engine, table_name):
     metadata = MetaData()
     metadata.reflect(bind=engine)
     table = metadata.tables[table_name]
+    print ("Table: ", table, engine)
     if table is not None:
+        close_all_sessions()
         Base.metadata.drop_all(engine, [table], checkfirst=True)
-
+        print ("Clear done: ", table)
 
 def load_taxi_data(engine, table_name, index=True):
     table_name = table_name
@@ -135,10 +138,10 @@ def ip_with_postgreSQL(ip_empty, setup_postgreSQL):
 
 @pytest.fixture(scope="session")
 def setup_mySQL(test_table_name_dict, skip_on_live_mode):
-    pytest.skip("Skip on mysql mode")
+    # pytest.skip("Skip on mysql mode")
 
     with _testing.mysql():
-        engine = create_engine(_testing.DatabaseConfigHelper.get_database_url("mySQL"))
+        engine = create_engine(_testing.DatabaseConfigHelper.get_database_url("mySQL"), isolation_level='READ UNCOMMITTED')
         # Load pre-defined datasets
         load_generic_testing_data(engine, test_table_name_dict)
         yield engine
