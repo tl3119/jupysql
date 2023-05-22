@@ -527,50 +527,50 @@ def test_profile_query(
             assert cell_value == str(expected[criteria][i])
 
 
-# @pytest.mark.parametrize(
-#     "table",
-#     [
-#         "numbers",
-#     ],
-# )
-# @pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
-# def test_sqlcmd_tables_columns(
-#     ip_with_dynamic_db, table, request, test_table_name_dict
-# ):
-#     ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
-#     out = ip_with_dynamic_db.run_cell(
-#         f"%sqlcmd columns --table {test_table_name_dict[table]}"
-#     )
-#     assert out.result
+@pytest.mark.parametrize(
+    "table",
+    [
+        "numbers",
+    ],
+)
+@pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
+def test_sqlcmd_tables_columns(
+    ip_with_dynamic_db, table, request, test_table_name_dict
+):
+    ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
+    out = ip_with_dynamic_db.run_cell(
+        f"%sqlcmd columns --table {test_table_name_dict[table]}"
+    )
+    assert out.result
 
 
-# @pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
-# def test_sqlcmd_tables(ip_with_dynamic_db, request):
-#     ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
-#     out = ip_with_dynamic_db.run_cell("%sqlcmd tables")
-#     assert out.result
+@pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
+def test_sqlcmd_tables(ip_with_dynamic_db, request):
+    ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
+    out = ip_with_dynamic_db.run_cell("%sqlcmd tables")
+    assert out.result
 
 
-# @pytest.mark.parametrize(
-#     "cell",
-#     [
-#         "%%sql\nSELECT * FROM numbers WHERE 0=1",
-#         "%%sql --with subset\nSELECT * FROM subset WHERE 0=1",
-#         "%%sql\nSELECT *\n-- %one $another\nFROM numbers WHERE 0=1",
-#     ],
-#     ids=[
-#         "simple-query",
-#         "cte",
-#         "interpolation-like-comment",
-#     ],
-# )
-# @pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
-# def test_sql_query(ip_with_dynamic_db, cell, request):
-#     ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
-#     ip_with_dynamic_db.run_cell(
-#         """%%sql --save subset --no-execute
-# SELECT * FROM numbers WHERE 1=0
-# """
-#     )
-#     out = ip_with_dynamic_db.run_cell(cell)
-#     assert out.error_in_exec is None
+@pytest.mark.parametrize(
+    "cell",
+    [
+        "%%sql\nSELECT * FROM numbers WHERE 0=1",
+        "%%sql --with subset\nSELECT * FROM subset WHERE 0=1",
+        "%%sql\nSELECT *\n-- %one $another\nFROM numbers WHERE 0=1",
+    ],
+    ids=[
+        "simple-query",
+        "cte",
+        "interpolation-like-comment",
+    ],
+)
+@pytest.mark.parametrize("ip_with_dynamic_db", ALL_DATABASES)
+def test_sql_query(ip_with_dynamic_db, cell, request):
+    ip_with_dynamic_db = request.getfixturevalue(ip_with_dynamic_db)
+    ip_with_dynamic_db.run_cell(
+        """%%sql --save subset --no-execute
+SELECT * FROM numbers WHERE 1=0
+"""
+    )
+    out = ip_with_dynamic_db.run_cell(cell)
+    assert out.error_in_exec is None
