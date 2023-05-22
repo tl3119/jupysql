@@ -486,8 +486,7 @@ def test_sql_cmd_magic_dos(ip_with_dynamic_db, request, capsys):
             "ip_with_MSSQL",
             "taxi",
             ["taxi_driver_name"],
-            {"unique": [3], "min": ["Eric Ken"], "max": ["Kevin Kelly"],
- "count": [45]},
+            {"unique": [3], "min": ["Eric Ken"], "max": ["Kevin Kelly"], "count": [45]},
         ),
         pytest.param(
             "ip_with_Snowflake",
