@@ -148,7 +148,7 @@ client = docker.from_env()
 
 def database_ready(
     database,
-    timeout=20,
+    timeout=60,
     poll_freq=0.5,
 ):
     """Wait until the container is ready to receive connections.
@@ -316,7 +316,7 @@ def mssql(is_bypass_init=False):
                 "MSSQL_SA_PASSWORD": db_config["password"],
                 "ACCEPT_EULA": "Y",
             },
-            ready_test=lambda: database_ready(database="MSSQL", timeout=60),
+            ready_test=lambda: database_ready(database="MSSQL"),
             healthcheck={
                 "test": "/opt/mssql-tools/bin/sqlcmd "
                 "-U $DB_USER -P $SA_PASSWORD "
