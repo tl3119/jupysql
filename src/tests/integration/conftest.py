@@ -131,7 +131,6 @@ def setup_mySQL(test_table_name_dict, skip_on_live_mode):
     with _testing.mysql():
         engine = create_engine(
             _testing.DatabaseConfigHelper.get_database_url("mySQL"),
-            isolation_level="READ UNCOMMITTED",
         )
         # Load pre-defined datasets
         load_generic_testing_data(engine, test_table_name_dict)
