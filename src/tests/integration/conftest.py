@@ -6,7 +6,8 @@ from sql import _testing
 
 # from sqlalchemy.ext.declarative import declarative_base
 import uuid
-from sqlalchemy.orm import close_all_sessions
+
+# from sqlalchemy.orm import close_all_sessions
 
 
 def pytest_addoption(parser):
@@ -57,8 +58,8 @@ def test_table_name_dict():
 
 
 def drop_table(engine, table_name):
-    engine.dispose()
-    close_all_sessions()
+    # engine.dispose()
+    # close_all_sessions()
     tbl = Table(table_name, MetaData(), autoload_with=engine)
     tbl.drop(engine, checkfirst=False)
 
