@@ -56,15 +56,9 @@ def test_table_name_dict():
 
 
 def drop_table(engine, table_name):
-    Base = declarative_base()
-    metadata = MetaData()
-    metadata.reflect(bind=engine)
-    table = metadata.tables[table_name]
-    print ("Table: ", table, engine)
-    if table is not None:
-        close_all_sessions()
-        Base.metadata.drop_all(engine, [table], checkfirst=True)
-        print ("Clear done: ", table)
+    tbl = Table(table_name, MetaData(), autoload_with=engine)
+    tbl.drop(engine, checkfirst=False)
+    print ("Clear done: ", tbl)
 
 def load_taxi_data(engine, table_name, index=True):
     table_name = table_name
