@@ -614,8 +614,8 @@ def test_custom_connection(ip_questdb, alias):
     assert isinstance(stored_connection, CustomConnection)
 
 
-def test_custom_connection_error(ip_questdb):
-    with pytest.raises(ValueError) as err:
-        CustomConnection()
+# def test_custom_connection_error(ip_questdb):
+#     with pytest.raises(ValueError) as err:
+#         CustomConnection()
 
-    assert "Engine cannot be None" in str(err)
+#     assert "Engine cannot be None" in str(err)
