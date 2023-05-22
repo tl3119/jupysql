@@ -57,13 +57,10 @@ def test_table_name_dict():
 
 
 def drop_table(engine, table_name):
-    print("Curr engine: ", engine, engine.close)
-    # engine.close()
     engine.dispose()
     close_all_sessions()
     tbl = Table(table_name, MetaData(), autoload_with=engine)
     tbl.drop(engine, checkfirst=False)
-    print("Clear done: ", tbl, engine)
 
 
 def load_taxi_data(engine, table_name, index=True):
