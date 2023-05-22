@@ -1,9 +1,10 @@
 import shutil
 import pandas as pd
 import pytest
-from sqlalchemy import MetaData, create_engine
+from sqlalchemy import MetaData, Table, create_engine
 from sql import _testing
-from sqlalchemy.ext.declarative import declarative_base
+
+# from sqlalchemy.ext.declarative import declarative_base
 import uuid
 from sqlalchemy.orm import close_all_sessions
 
@@ -56,9 +57,11 @@ def test_table_name_dict():
 
 
 def drop_table(engine, table_name):
+    close_all_sessions()
     tbl = Table(table_name, MetaData(), autoload_with=engine)
     tbl.drop(engine, checkfirst=False)
-    print ("Clear done: ", tbl)
+    print("Clear done: ", tbl, engine)
+
 
 def load_taxi_data(engine, table_name, index=True):
     table_name = table_name
@@ -135,7 +138,10 @@ def setup_mySQL(test_table_name_dict, skip_on_live_mode):
     # pytest.skip("Skip on mysql mode")
 
     with _testing.mysql():
-        engine = create_engine(_testing.DatabaseConfigHelper.get_database_url("mySQL"), isolation_level='READ UNCOMMITTED')
+        engine = create_engine(
+            _testing.DatabaseConfigHelper.get_database_url("mySQL"),
+            isolation_level="READ UNCOMMITTED",
+        )
         # Load pre-defined datasets
         load_generic_testing_data(engine, test_table_name_dict)
         yield engine
