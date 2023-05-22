@@ -4,6 +4,7 @@ import pytest
 import warnings
 from sql.telemetry import telemetry
 from unittest.mock import ANY, Mock
+
 # import math
 
 ALL_DATABASES = [
