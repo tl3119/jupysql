@@ -3,11 +3,7 @@ import pandas as pd
 import pytest
 from sqlalchemy import MetaData, Table, create_engine
 from sql import _testing
-
-# from sqlalchemy.ext.declarative import declarative_base
 import uuid
-
-# from sqlalchemy.orm import close_all_sessions
 
 
 def pytest_addoption(parser):
@@ -58,8 +54,6 @@ def test_table_name_dict():
 
 
 def drop_table(engine, table_name):
-    # engine.dispose()
-    # close_all_sessions()
     tbl = Table(table_name, MetaData(), autoload_with=engine)
     tbl.drop(engine, checkfirst=False)
 
@@ -104,8 +98,6 @@ def tear_down_generic_testing_data(engine, test_table_name_dict):
 
 @pytest.fixture(scope="session")
 def setup_postgreSQL(test_table_name_dict, skip_on_live_mode):
-    # pytest.skip("Skip on postgresql mode")
-
     with _testing.postgres():
         engine = create_engine(
             _testing.DatabaseConfigHelper.get_database_url("postgreSQL")
@@ -136,8 +128,6 @@ def ip_with_postgreSQL(ip_empty, setup_postgreSQL):
 
 @pytest.fixture(scope="session")
 def setup_mySQL(test_table_name_dict, skip_on_live_mode):
-    # pytest.skip("Skip on mysql mode")
-
     with _testing.mysql():
         engine = create_engine(
             _testing.DatabaseConfigHelper.get_database_url("mySQL"),
@@ -169,8 +159,6 @@ def ip_with_mySQL(ip_empty, setup_mySQL):
 
 @pytest.fixture(scope="session")
 def setup_mariaDB(test_table_name_dict, skip_on_live_mode):
-    pytest.skip("Skip on mariadb mode")
-
     with _testing.mariadb():
         engine = create_engine(
             _testing.DatabaseConfigHelper.get_database_url("mariaDB")
@@ -228,8 +216,6 @@ def ip_with_SQLite(ip_empty, setup_SQLite):
 
 @pytest.fixture(scope="session")
 def setup_duckDB(test_table_name_dict, skip_on_live_mode):
-    # pytest.skip("Skip on duckDB mode")
-
     engine = create_engine(_testing.DatabaseConfigHelper.get_database_url("duckDB"))
     # Load pre-defined datasets
     load_generic_testing_data(engine, test_table_name_dict)
@@ -257,7 +243,6 @@ def ip_with_duckDB(ip_empty, setup_duckDB):
 
 @pytest.fixture(scope="session")
 def setup_MSSQL(test_table_name_dict, skip_on_live_mode):
-    # pytest.skip("Skip on mssql mode")
     with _testing.mssql():
         engine = create_engine(_testing.DatabaseConfigHelper.get_database_url("MSSQL"))
         # Load pre-defined datasets
