@@ -8,7 +8,7 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   pull_request:
-      - '514-cd-script-not-taking-into-account-integration-tests'
+      
 jobs:
   test:
     strategy:
@@ -124,4 +124,5 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
           TAG: ${{  github.ref_name }}
         run: |
-          echo "I am releasing to production"
+          echo "tag is $TAG"
+          pkgmt release $TAG --production --yes
