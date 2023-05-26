@@ -102,7 +102,7 @@ jobs:
 
 
   release:
-    needs: [test, test-sqlalchemy-v1, check, database-integration-test]
+    needs: [test, test-sqlalchemy-v1, check, local-it]
     if: startsWith(github.ref, 'refs/tags') && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 

@@ -1,5 +1,5 @@
 name: CI - DB Integration - Local
-
+id: local-it
 on:
   push:
     branches:
