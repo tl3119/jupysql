@@ -2,6 +2,9 @@
 
 ## 0.7.6dev
 
+* [Feature] Support for printing capture variables using `=<<` syntax (by [@jorisroovers](https://github.com/jorisroovers))
+* [Feature] Adds `--persist-replace` argument to replace existing tables when persisting data frames (#440)
+
 ## 0.7.5 (2023-05-24)
 
 * [Feature] Using native DuckDB `.df()` method when using `autopandas`
