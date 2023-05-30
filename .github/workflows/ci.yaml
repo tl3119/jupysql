@@ -135,3 +135,20 @@ jobs:
         run: |
           echo "tag is $TAG"
           pkgmt release $TAG --production --yes
+
+  release-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'CI - DB Integration - Cloud'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20
+
+      - name: echo something
+        run: |
+          echo "cloud is finished"
