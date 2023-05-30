@@ -8,10 +8,6 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   pull_request:
-  workflow_run:
-    workflows: ["CI - DB Integration - Cloud", "CI - DB Integration - Local"]
-    types:
-      - completed
 
 jobs:
   test:
@@ -114,6 +110,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'CI - DB Integration - Cloud'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
