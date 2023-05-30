@@ -139,13 +139,13 @@ jobs:
   release-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for tests to succeed
-        uses: lewagon/wait-on-check-action@master
+      - name: Wait for test to succeed
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: wait-for-test
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          check-name: 'database-live-integration-test'
-          repo-token: ${{ github.token }}
-          wait-interval: 20
+          token: ${{ database-live-integration-test }}
+          checkName: build
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: echo something
         run: |
