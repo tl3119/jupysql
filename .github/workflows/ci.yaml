@@ -9,7 +9,7 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
   pull_request:
   workflow_run:
-    workflows: ["CI - DB Integration - Cloud"]
+    workflows: ["CI - DB Integration - Cloud", "CI - DB Integration - Local"]
     types:
       - completed
 
@@ -109,7 +109,7 @@ jobs:
 
   release:
     needs: [test, test-sqlalchemy-v1, check]
-    if: startsWith(github.ref, 'refs/tags') && github.event_name != 'pull_request' && ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: startsWith(github.ref, 'refs/tags') && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     steps:
