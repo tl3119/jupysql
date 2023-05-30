@@ -1,11 +1,11 @@
 name: CI - DB Integration - Cloud 
 
 on:
-  push:
-    branches:
-      - master
-      - 'dev/**'
-  pull_request:
+  # push:
+  #   branches:
+  #     - master
+  #     - 'dev/**'
+  # pull_request:
   workflow_call:
     secrets:
       SF_USERNAME:
@@ -14,7 +14,7 @@ on:
         required: false
       SF_DATABASE:
         required: false
-        
+
 jobs:
   database-live-integration-test:
     strategy:
