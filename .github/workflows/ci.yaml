@@ -141,7 +141,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Wait for tests to succeed
-        uses: lewagon/wait-on-check-action@v1.3.1
+        uses: lewagon/wait-on-check-action@master
         with:
           ref: ${{ github.sha }}
           check-name: 'database-live-integration-test'
