@@ -139,12 +139,12 @@ jobs:
   release-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for test to succeed
+      - name: Wait for build to succeed
         uses: fountainhead/action-wait-for-check@v1.1.0
-        id: wait-for-test
+        id: wait-for-build
         with:
-          token: ${{ database-live-integration-test }}
-          checkName: build
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: database-integration-test
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: echo something
