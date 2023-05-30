@@ -141,8 +141,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Wait for tests to succeed
-        if: ${{github.ref}} = "refs/heads/<branch-name>"
-        uses: lewagon/wait-on-check-action@1.1.1
+        if: ${{github.ref}} = "refs/heads/tonyk/fix-ci-dependency-workflow-run"
+        uses: lewagon/wait-on-check-action@master
         with:
           ref: ${{ github.sha }}
           check-name: 'database-live-integration-test'
