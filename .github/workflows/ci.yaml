@@ -8,7 +8,11 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   pull_request:
-      
+  workflow_run:
+    workflows: ["CI - DB Integration - Cloud"]
+    types:
+      - completed
+
 jobs:
   integration-test-live:
     uses: ./.github/workflows/ci-integration-db-live.yaml
