@@ -7,13 +7,13 @@ on:
   #     - 'dev/**'
   # pull_request:
   workflow_call:
-    secrets:
-      SF_USERNAME:
-        required: false
-      SF_PASSWORD:
-        required: false
-      SF_DATABASE:
-        required: false
+    # secrets:
+    #   SF_USERNAME:
+    #     required: false
+    #   SF_PASSWORD:
+    #     required: false
+    #   SF_DATABASE:
+    #     required: false
 
 jobs:
   database-live-integration-test:
