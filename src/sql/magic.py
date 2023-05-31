@@ -13,6 +13,7 @@ from IPython.core.magic import (
     magics_class,
     needs_local_scope,
     no_var_expand,
+    UsageError,
 )
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 from sqlalchemy.exc import OperationalError, ProgrammingError, DatabaseError
@@ -179,7 +180,31 @@ class SqlMagic(Magics, Configurable):
     @no_var_expand
     @needs_local_scope
     @line_magic("sql")
+    def check_line(self, line):
+        # Split the line into tokens separated by whitespace
+        tokens = line.split()
+        arguments = []
+
+        # Iterate through the tokens to separate arguments and SQL code
+        # If the token starts with "--", it is an argument
+        # Otherwise, it is part of the SQL code
+        for token in tokens:
+            if token.startswith("--"):
+                arguments.append(token)
+
+        if len(arguments) > 0:
+            raise UsageError("Unrecognized argument(s): {}".format(arguments))
+
     @cell_magic("sql")
+    def check_cell(self, line):
+        # Handle the arguments for cell_magic
+        args = parse_argstring(self.check_cell, line)
+
+        if args.unrecognized_args:
+            raise UsageError(
+                "Unrecognized argument(s): {}".format(args.unrecognized_args)
+            )
+
     @line_magic("jupysql")
     @cell_magic("jupysql")
     @magic_arguments()
