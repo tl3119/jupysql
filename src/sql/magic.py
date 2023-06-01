@@ -21,6 +21,7 @@ import warnings
 import sql.connection
 import sql.parse
 import sql.run
+from sql.parse import _option_strings_from_parser
 from sql import display, exceptions
 from sql.store import store
 from sql.command import SQLCommand
@@ -43,23 +44,6 @@ from sql.telemetry import telemetry
 
 
 SUPPORT_INTERACTIVE_WIDGETS = ["Checkbox", "Text", "IntSlider", ""]
-recognized_arguments = [
-    "--connections",
-    "--close",
-    "--creator",
-    "--section",
-    "--persist",
-    "--persist-replace",
-    "--no-index",
-    "--append",
-    "--connection_arguments",
-    "--file",
-    "--save",
-    "--with",
-    "--no-execute",
-    "--alias",
-    "--interact",
-]
 
 
 @magics_class
@@ -335,13 +319,14 @@ class SqlMagic(Magics, Configurable):
 
         # Iterate through the tokens to separate arguments and SQL code
         # If the token starts with "--", it is an argument
-        # Otherwise, it is part of the SQL code
         for token in tokens:
             if token.startswith("--"):
                 arguments.append(token)
 
         for check_argument in arguments:
-            if check_argument not in recognized_arguments:
+            if check_argument not in _option_strings_from_parser(
+                SqlMagic.execute.parser
+            ):
                 raise exceptions.UsageError(
                     "Unrecognized argument(s): {}".format(check_argument)
                 )

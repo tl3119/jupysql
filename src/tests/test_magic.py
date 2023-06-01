@@ -187,8 +187,13 @@ def test_persist_no_index(ip):
     assert persisted == [(1, "foo"), (2, "bar")]
 
 
-def test_unrecognized_arguments(ip):
-    result = ip.run_cell("%sql --stuff sqlite://")
+def test_unrecognized_arguments_cell_magic(ip):
+    result = ip.run_cell("%%sql --stuff \n SELECT * FROM test")
+    assert "Unrecognized argument(s)" in str(result.error_in_exec)
+
+
+def test_unrecognized_arguments_line_magic(ip):
+    result = ip.run_cell("%sql select * from penguins.csv limit --some sql comment")
     assert "Unrecognized argument(s)" in str(result.error_in_exec)
 
 
