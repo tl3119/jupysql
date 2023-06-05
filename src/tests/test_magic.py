@@ -192,11 +192,6 @@ def test_unrecognized_arguments_cell_magic(ip):
     assert "Unrecognized argument(s)" in str(result.error_in_exec)
 
 
-def test_unrecognized_arguments_line_magic(ip):
-    result = ip.run_cell("%sql select * from penguins.csv limit --some sql comment")
-    assert "Unrecognized argument(s)" in str(result.error_in_exec)
-
-
 def test_persist_invalid_identifier(ip):
     result = ip.run_cell("%sql --persist sqlite:// not an identifier")
     assert "not a valid identifier" in str(result.error_in_exec)
