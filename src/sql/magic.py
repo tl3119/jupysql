@@ -188,9 +188,14 @@ class SqlMagic(Magics, Configurable):
 
         # Iterate through the tokens to separate arguments and SQL code
         # If the token starts with "--", it is an argument
+        breakLoop = False
         for token in tokens:
             if token.startswith("--"):
                 arguments.append(token)
+                breakLoop = True
+            else:
+                if breakLoop:
+                    break
 
         declared_argument = _option_strings_from_parser(SqlMagic.execute.parser)
         # check only for cell magic

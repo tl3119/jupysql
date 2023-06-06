@@ -187,8 +187,17 @@ def test_persist_no_index(ip):
     assert persisted == [(1, "foo"), (2, "bar")]
 
 
-def test_unrecognized_arguments_cell_magic(ip):
-    result = ip.run_cell("%%sql --stuff \n SELECT * FROM test")
+@pytest.mark.parametrize(
+    "sql_statement",
+    [
+        "%%sql --stuff\n SELECT * FROM test",
+        "%%sql --unknown\n SELECT * FROM test",
+        "%%sql --invalid-arg\n SELECT * FROM test",
+        "%sql select * from penguins.csv limit --some sql comment",
+    ],
+)
+def test_unrecognized_arguments_cell_magic(ip, sql_statement):
+    result = ip.run_cell(sql_statement)
     assert "Unrecognized argument(s)" in str(result.error_in_exec)
 
 
