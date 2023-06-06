@@ -77,7 +77,7 @@ Suppose we create two database, named one and two. Then, assign alias to both co
 %sql 
 ```
 
-It will run query in "two" database
+It will run query in "two" database since it's the latest one we connected to.
 
 Pass the alias to make it the current connection:
 
