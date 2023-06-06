@@ -25,6 +25,5 @@ dependencies:
     - pytest
     # for %%sql --interact
     - ipywidgets
-    # https://github.com/pydata/pydata-sphinx-theme/issues/1274
     # needed to upload and download from/to S3 for notebook cache
     - awscli
