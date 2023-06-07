@@ -188,20 +188,20 @@ def test_persist_no_index(ip):
 
 
 @pytest.mark.parametrize(
-    "sql_statement",
+    "sql_statement, expected_error",
     [
-        "%%sql --stuff\n SELECT * FROM test",
-        "%%sql --unknown\n SELECT * FROM test",
-        "%%sql --invalid-arg\n SELECT * FROM test",
+        ("%%sql --stuff\n SELECT * FROM test", "Unrecognized argument(s)"),
+        ("%%sql --unknown\n SELECT * FROM test", "Unrecognized argument(s)"),
+        ("%%sql --invalid-arg\n SELECT * FROM test", "Unrecognized argument(s)"),
+        ("%%sql \n SELECT * FROM test", None),
+        ("%sql select * FROM penguins.csv --some", None),
     ],
 )
-def test_unrecognized_arguments_cell_magic(ip, sql_statement):
+def test_unrecognized_arguments_cell_magic(ip, sql_statement, expected_error):
     result = ip.run_cell(sql_statement)
-    out = ip.run_cell("%%sql \n SELECT * FROM test")
-    line_out = ip.run_cell("%sql select * FROM penguins.csv --some")
-    assert "Unrecognized argument(s)" in str(result.error_in_exec)
-    assert out.error_in_exec is None
-    assert line_out.error_in_exec is None
+    assert (result.error_in_exec is not None) == (expected_error is not None)
+    if expected_error:
+        assert expected_error in str(result.error_in_exec)
 
 
 def test_persist_invalid_identifier(ip):
