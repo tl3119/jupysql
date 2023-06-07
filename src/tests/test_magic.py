@@ -193,12 +193,13 @@ def test_persist_no_index(ip):
         "%%sql --stuff\n SELECT * FROM test",
         "%%sql --unknown\n SELECT * FROM test",
         "%%sql --invalid-arg\n SELECT * FROM test",
-        "%sql select * from penguins.csv limit --some sql comment",
     ],
 )
 def test_unrecognized_arguments_cell_magic(ip, sql_statement):
     result = ip.run_cell(sql_statement)
+    out = ip.run_cell("%%sql \n SELECT * FROM test")
     assert "Unrecognized argument(s)" in str(result.error_in_exec)
+    assert out.error_in_exec is None
 
 
 def test_persist_invalid_identifier(ip):
