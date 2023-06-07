@@ -193,8 +193,10 @@ def test_persist_no_index(ip):
         ("%%sql --stuff\n SELECT * FROM test", "Unrecognized argument(s)"),
         ("%%sql --unknown\n SELECT * FROM test", "Unrecognized argument(s)"),
         ("%%sql --invalid-arg\n SELECT * FROM test", "Unrecognized argument(s)"),
+        ("%%sql -invalid-arg\n SELECT * FROM test", "Unrecognized argument(s)"),
         ("%%sql \n SELECT * FROM test", None),
         ("%sql select * FROM penguins.csv --some", None),
+        ("%%sql --persist '--some' \n SELECT * FROM test", "not a valid identifier"),
     ],
 )
 def test_unrecognized_arguments_cell_magic(ip, sql_statement, expected_error):

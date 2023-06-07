@@ -18,6 +18,7 @@ from IPython.core.magic_arguments import argument, magic_arguments, parse_argstr
 from sqlalchemy.exc import OperationalError, ProgrammingError, DatabaseError
 
 import warnings
+import shlex
 from difflib import get_close_matches
 import sql.connection
 import sql.parse
@@ -184,14 +185,14 @@ class SqlMagic(Magics, Configurable):
     def check_random_arguments(self, line="", cell=""):
         # check only for cell magic
         if cell != "":
-            tokens = line.split()
+            tokens = shlex.split(line, posix=False)
             arguments = []
 
             # Iterate through the tokens to separate arguments and SQL code
             # If the token starts with "--", it is an argument
             breakLoop = False
             for token in tokens:
-                if token.startswith("--"):
+                if token.startswith("--") or token.startswith("-"):
                     arguments.append(token)
                     breakLoop = True
                 else:
