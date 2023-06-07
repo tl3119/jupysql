@@ -182,24 +182,23 @@ class SqlMagic(Magics, Configurable):
                 print(f"Disabled '{other}' since '{change['name']}' was enabled.")
 
     def check_random_arguments(self, line="", cell=""):
-        # Split the line into tokens separated by whitespace
-        tokens = line.split()
-        arguments = []
-
-        # Iterate through the tokens to separate arguments and SQL code
-        # If the token starts with "--", it is an argument
-        breakLoop = False
-        for token in tokens:
-            if token.startswith("--"):
-                arguments.append(token)
-                breakLoop = True
-            else:
-                if breakLoop:
-                    break
-
-        declared_argument = _option_strings_from_parser(SqlMagic.execute.parser)
         # check only for cell magic
-        if cell is not None:
+        if cell != "":
+            tokens = line.split()
+            arguments = []
+
+            # Iterate through the tokens to separate arguments and SQL code
+            # If the token starts with "--", it is an argument
+            breakLoop = False
+            for token in tokens:
+                if token.startswith("--"):
+                    arguments.append(token)
+                    breakLoop = True
+                else:
+                    if breakLoop:
+                        break
+
+            declared_argument = _option_strings_from_parser(SqlMagic.execute.parser)
             for check_argument in arguments:
                 if check_argument not in declared_argument:
                     raise exceptions.UsageError(
