@@ -37,8 +37,6 @@ dialect+driver://username:password@host:port/database
 If you're using a database that requires a password, keep reading for more secure methods.
 ```
 
-+++
-
 ## Building URL strings securely
 
 To connect in a more secure way, you can dynamically build your URL string so your password isn't hardcoded:
@@ -82,6 +80,8 @@ engine = create_engine(db_url)
 ```
 
 ```{code-cell} ipython3
+:tags: [remove-output]
+
 %load_ext sql
 ```
 
@@ -89,7 +89,7 @@ engine = create_engine(db_url)
 %sql engine
 ```
 
-+++
++++ {"user_expressions": []}
 
 ## Secure Connections
 
