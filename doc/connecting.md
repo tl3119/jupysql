@@ -81,18 +81,13 @@ from sqlalchemy import create_engine
 engine = create_engine(db_url)
 ```
 
-## Connecting to Databases
+```{code-cell} ipython3
+%load_ext sql
+```
 
-Check out our guide for connecting to a database:
-
-- [PostgreSQL](integrations/postgres-connect)
-- [ClickHouse](integrations/clickhouse)
-- [MariaDB](integrations/mariadb)
-- [MindsDB](integrations/mindsdb)
-- [MSSQL](integrations/mssql)
-- [MySQL](integrations/mysql)
-- [QuestDB](integrations/questdb)
-- [Oracle](integrations/oracle)
+```{code-cell} ipython3
+%sql engine
+```
 
 +++
 
@@ -332,6 +327,10 @@ You're all set
 For a more detailed example please see [QuestDB tutorial](integrations/questdb.ipynb)
 
 ## Conclusion
+
+Once the URL string is constructed, you can create an engine using `create_engine` and establish a connection to the database. JupySQL provides the `%load_ext sql` magic command to load the SQL extension. Then, you can execute SQL queries using `%sql`.
+
+JupySQL offers flexible and secure methods for connecting to databases in Jupyter notebooks, allowing you to execute SQL queries and interact with various database systems efficiently.
 
 ## Tutorials
 
