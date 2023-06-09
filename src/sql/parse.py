@@ -65,6 +65,16 @@ def parse(cell, config):
         if len(pieces) == 2:
             return result
         cell = pieces[2]
+    elif len(pieces) > 1 and pieces[1] == "=<<":
+        result["result_var"] = pieces[0]
+        result["return_result_var"] = True
+        cell = pieces[2]
+
+    pieces = cell.split(None, 3)
+    if len(pieces) > 1 and pieces[1] == "=" and pieces[2] == "<<":
+        result["result_var"] = pieces[0]
+        result["return_result_var"] = True
+        cell = pieces[3]
 
     result["sql"] = cell
     return result
