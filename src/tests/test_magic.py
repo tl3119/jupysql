@@ -146,6 +146,22 @@ def test_result_var_multiline_shovel(ip):
             """,
             {"last_name": ("Shakespeare", "Brecht")},
         ),
+        (
+            """
+            sqlite://
+            x =     <<
+            SELECT last_name FROM author;
+            """,
+            {"last_name": ("Shakespeare", "Brecht")},
+        ),
+        (
+            """
+            sqlite://
+            x      =     <<
+            SELECT last_name FROM author;
+            """,
+            {"last_name": ("Shakespeare", "Brecht")},
+        ),
     ],
 )
 def test_return_result_var(ip, sql_statement, expected_result):
