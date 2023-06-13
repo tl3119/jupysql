@@ -55,7 +55,7 @@ def parse(cell, config):
         cell = pieces[1]
 
     pieces = cell.split(None, 2)
-    # deal with situation var= << 'sql'
+    # deal with the situation var= << 'sql'
     if len(pieces) > 1 and pieces[1] == "<<":
         if pieces[0].endswith("="):
             result["result_var"] = pieces[0][:-1]
