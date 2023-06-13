@@ -193,7 +193,7 @@ show_legend = widgets.ToggleButton(
 
 ```{code-cell} ipython3
 def plot(b, cmap, show_legend):
-   (ggplot("diamonds", aes(x="price")) + geom_histogram(bins=b, fill="cut", cmap=cmap)
+    (ggplot("diamonds", aes(x="price")) + geom_histogram(bins=b, fill="cut", cmap=cmap)
      + facet_wrap("color", legend=show_legend))
 ```
 

@@ -156,7 +156,6 @@ ax = %sqlplot histogram --table penguins.csv --column body_mass_g
 ax.set_title("Body mass (grams)")
 _ = ax.grid()
 ```
-
 ## `%sqlplot bar`
 
 ```{versionadded} 0.7.6
@@ -197,7 +196,7 @@ You can also pass the orientation using the `orient` argument.
 
 ```{code-cell} ipython3
 %sqlplot bar --table add_col --column species cnt --with add_col --orient h
-```
+``` 
 
 You can also show the number on top of the bar using the `S`/`show-numbers` argument.
 
@@ -238,7 +237,6 @@ group by species
 ```{code-cell} ipython3
 %sqlplot pie --table add_col --column species cnt --with add_col
 ```
-
 Here, `species` is the `labels` column and `cnt` is the `x` column.
 
 
