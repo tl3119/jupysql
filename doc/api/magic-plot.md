@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.4
+    jupytext_version: 1.14.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -152,7 +152,7 @@ generate histograms without explicitly removing NULL entries.
 `%sqlplot` returns a `matplotlib.Axes` object.
 
 ```{code-cell} ipython3
-ax = %sqlplot histogram --table penguins.csv --column body_mass_g
+ax = %sqlplot histogram --table penguins.csv --column body_mass_g 
 ax.set_title("Body mass (grams)")
 _ = ax.grid()
 ```
