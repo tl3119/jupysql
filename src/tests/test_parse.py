@@ -79,19 +79,19 @@ def test_parse_shovel_operator():
 
 
 def test_parse_return_shovel_operator():
-    test_dict = {
+    result = {
         "connection": "",
         "sql": "SELECT * FROM work",
         "result_var": "dest",
         "return_result_var": True,
     }
-    assert parse("dest= << SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest = << SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest =<< SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest =        << SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest      =<< SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest =          << SELECT * FROM work", empty_config) == test_dict
-    assert parse("dest=<< SELECT * FROM work", empty_config) == test_dict
+    assert parse("dest= << SELECT * FROM work", empty_config) == result
+    assert parse("dest = << SELECT * FROM work", empty_config) == result
+    assert parse("dest =<< SELECT * FROM work", empty_config) == result
+    assert parse("dest =        << SELECT * FROM work", empty_config) == result
+    assert parse("dest      =<< SELECT * FROM work", empty_config) == result
+    assert parse("dest =          << SELECT * FROM work", empty_config) == result
+    assert parse("dest=<< SELECT * FROM work", empty_config) == result
 
 
 def test_parse_connect_plus_shovel():
