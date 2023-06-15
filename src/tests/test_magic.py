@@ -133,7 +133,7 @@ def test_result_var_multiline_shovel(ip):
         (
             """
             sqlite://
-            x =<<
+            x = <<
             SELECT last_name FROM author;
             """,
             {"last_name": ("Shakespeare", "Brecht")},
@@ -168,10 +168,9 @@ def test_return_result_var(ip, sql_statement, expected_result):
     result = ip.run_cell_magic("sql", "", sql_statement)
     var = ip.user_global_ns["x"]
     assert "Shakespeare" in str(var) and "Brecht" in str(var)
-    if result is None:
-        assert result is None
-    else:
-        assert result.dict() == expected_result
+    if result is not None:
+        result = result.dict()
+    assert result == expected_result
 
 
 def test_access_results_by_keys(ip):
