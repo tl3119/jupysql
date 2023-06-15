@@ -53,6 +53,7 @@ def parse(cell, config):
         if len(pieces) == 1:
             return result
         cell = pieces[1]
+    # handle no space around =
     if pieces[0].endswith("=<<"):
         result["result_var"] = pieces[0][:-3]
         result["return_result_var"] = True
