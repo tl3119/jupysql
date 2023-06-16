@@ -56,9 +56,9 @@ DEV = [
 INTEGRATION = [
     "dockerctx",
     "pyarrow",
-    "psycopg2-binary",
+    "psycopg-binary==3.1.9",
     "pymysql",
-    "pgspecial==2.0.1",
+    "pgspecial==2.1.0",
     "pyodbc",
     "snowflake-sqlalchemy",
     "oracledb",
