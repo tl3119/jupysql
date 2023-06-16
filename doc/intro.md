@@ -161,7 +161,7 @@ returning the results.
 FROM languages
 ```
 
-The `myvar= <<` supports flexible spaceing, such as `myvar = <<` and `myvar =<<`. All these syntaxs can work, for example:
+Flexible spacing is supported in assignments, e.g., myvar = << and myvar =<<. Let's see an example below:
 
 ```{code-cell} ipython3
 %%sql lang = << SELECT *
