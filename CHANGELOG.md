@@ -13,6 +13,7 @@
 * [Doc] Snowflake integration guide (#384)
 * [Doc] User guide on using JupySQL in `.py` scripts (#449)
 * [Fix] Validating arguments passed to `%%sql` (#561)
+* [Fix] Upgrade `pgspecial` and `psycopg` version ([#367](https://github.com/ploomber/jupysql/issues/367))
 
 ## 0.7.8 (2023-06-01)
 
