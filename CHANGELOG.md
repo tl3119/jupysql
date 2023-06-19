@@ -17,6 +17,7 @@
 * [Doc] Snowflake integration guide ([#384](https://github.com/ploomber/jupysql/issues/384))
 * [Doc] User guide on using JupySQL in `.py` scripts ([#449](https://github.com/ploomber/jupysql/issues/449))
 * [Doc] Added `%magic?` to APIs and quickstart ([#97](https://github.com/ploomber/jupysql/issues/97))
+* [Fix] Upgrade `pgspecial` and `psycopg` version ([#367](https://github.com/ploomber/jupysql/issues/367))
 
 
 ## 0.7.8 (2023-06-01)
