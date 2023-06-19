@@ -13,6 +13,7 @@
 * [Doc] Snowflake integration guide (#384)
 * [Doc] User guide on using JupySQL in `.py` scripts (#449)
 * [Fix] Validating arguments passed to `%%sql` (#561)
+* [Feature] Support flexible spacing in `myvar=<<` operator ([#525](https://github.com/ploomber/jupysql/issues/525))
 
 ## 0.7.8 (2023-06-01)
 
