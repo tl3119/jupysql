@@ -58,7 +58,7 @@ INTEGRATION = [
     "pyarrow",
     "psycopg-binary==3.1.9",
     "pymysql",
-    "pgspecial==2.1.0",   # upgrade pgspecial
+    "pgspecial==2.1.0",
     "pyodbc",
     "snowflake-sqlalchemy",
     "oracledb",
