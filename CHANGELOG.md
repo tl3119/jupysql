@@ -17,7 +17,6 @@
 * [Doc] Snowflake integration guide ([#384](https://github.com/ploomber/jupysql/issues/384))
 * [Doc] User guide on using JupySQL in `.py` scripts ([#449](https://github.com/ploomber/jupysql/issues/449))
 * [Doc] Added `%magic?` to APIs and quickstart ([#97](https://github.com/ploomber/jupysql/issues/97))
-* [Feature] Supported flexible spacing in `myvar=<<` operator ([#525](https://github.com/ploomber/jupysql/issues/525))
 
 ## 0.7.8 (2023-06-01)
 
