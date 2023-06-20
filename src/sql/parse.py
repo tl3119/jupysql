@@ -72,16 +72,16 @@ def parse(cell, config):
             return result
         cell = pieces[2]
     # handle flexible spacing around =<<
-    elif len(pieces) > 1 and pieces[1] == "=<<":
+    elif len(pieces) > 1 and (
+        (pieces[1] == "=<<") or (pieces[1] == "=" and pieces[2].startswith("<<"))
+    ):
         result["result_var"] = pieces[0]
         result["return_result_var"] = True
-        cell = pieces[2]
-
-    pieces = cell.split(None, 3)
-    if len(pieces) > 1 and pieces[1] == "=" and pieces[2] == "<<":
-        result["result_var"] = pieces[0]
-        result["return_result_var"] = True
-        cell = pieces[3]
+        if pieces[1] == "=<<":
+            cell = pieces[2]
+        else:
+            pieces = cell.split(None, 3)
+            cell = pieces[3]
 
     result["sql"] = cell
     return result
