@@ -73,7 +73,7 @@ def parse(cell, config):
         cell = pieces[2]
     # handle flexible spacing around =<<
     elif len(pieces) > 1 and (
-        (pieces[1] == "=<<") or (pieces[1] == "=" and pieces[2].startswith("<<"))
+        (pieces[1] == "=<<") or (pieces[1] == "=" and pieces[2].startswith("<< "))
     ):
         result["result_var"] = pieces[0]
         result["return_result_var"] = True
