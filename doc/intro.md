@@ -161,13 +161,6 @@ returning the results.
 FROM languages
 ```
 
-Flexible spacing is supported in assignments, e.g., myvar = << and myvar =<<. Let's see an example below:
-
-```{code-cell} ipython3
-%%sql lang = << SELECT *
-FROM languages
-```
-
 +++
 
 ## Considerations

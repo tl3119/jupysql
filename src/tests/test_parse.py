@@ -90,7 +90,7 @@ def test_parse_shovel_operator():
         "dest=<< SELECT * FROM work",
     ],
 )
-def test_parse_return_shovel_operator(input_string):
+def test_parse_return_shovel_operator(input_string, ip):
     result = {
         "connection": "",
         "sql": "SELECT * FROM work",
