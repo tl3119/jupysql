@@ -3,6 +3,9 @@
 ## 0.7.10dev
 * [Feature] Support flexible spacing `myvar=<<` operator ([#525](https://github.com/ploomber/jupysql/issues/525))
 
+* [Doc] Document --persist-replace in API section (#539)
+* [Fix] Fixed CI issue by updating `invalid_connection_string_duckdb` in `test_magic.py` (#631)
+
 ## 0.7.9 (2023-06-19)
 
 * [Feature] Modified `histogram` command to support data with NULL values ([#176](https://github.com/ploomber/jupysql/issues/176))
