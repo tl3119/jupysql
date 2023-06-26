@@ -233,6 +233,7 @@ class ResultSet(ColumnGuesserMixin):
         Any additional keyword arguments will be passed
         through to ``matplotlib.pylab.pie``.
         """
+        warnings.warn("Please use %sqlplot API")
         self.guess_pie_columns(xlabel_sep=key_word_sep)
         import matplotlib.pylab as plt
 
@@ -302,6 +303,7 @@ class ResultSet(ColumnGuesserMixin):
         Any additional keyword arguments will be passed
         through to ``matplotlib.pylab.bar``.
         """
+        warnings.warn("Please use %sqlplot API")
         import matplotlib.pylab as plt
 
         ax = plt.gca()
