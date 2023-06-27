@@ -236,7 +236,7 @@ class ResultSet(ColumnGuesserMixin):
         warnings.warn(
             (
                 ".pie() will be removed in a future version,"
-                "please use %sqlplot bar. If you need help migrating,"
+                "please use %sqlplot pie. If you need help migrating,"
                 "send us a message: https://ploomber.io/community"
             )
         )
