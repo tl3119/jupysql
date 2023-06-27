@@ -233,7 +233,13 @@ class ResultSet(ColumnGuesserMixin):
         Any additional keyword arguments will be passed
         through to ``matplotlib.pylab.pie``.
         """
-        warnings.warn("Please use %sqlplot API")
+        warnings.warn(
+            (
+                ".pie() will be removed in a future version,"
+                "please use %sqlplot bar. If you need help migrating,"
+                "send us a message: https://ploomber.io/community"
+            )
+        )
         self.guess_pie_columns(xlabel_sep=key_word_sep)
         import matplotlib.pylab as plt
 
@@ -262,6 +268,13 @@ class ResultSet(ColumnGuesserMixin):
         Any additional keyword arguments will be passed
         through to ``matplotlib.pylab.plot``.
         """
+        warnings.warn(
+            (
+                ".plot() will be removed in a future version."
+                "If you need help migrating, send us a message: "
+                "https://ploomber.io/community"
+            )
+        )
         import matplotlib.pylab as plt
 
         self.guess_plot_columns()
@@ -303,7 +316,13 @@ class ResultSet(ColumnGuesserMixin):
         Any additional keyword arguments will be passed
         through to ``matplotlib.pylab.bar``.
         """
-        warnings.warn("Please use %sqlplot API")
+        warnings.warn(
+            (
+                ".bar() will be removed in a future version,"
+                "please use %sqlplot bar. If you need help migrating,"
+                "send us a message: https://ploomber.io/community"
+            )
+        )
         import matplotlib.pylab as plt
 
         ax = plt.gca()
