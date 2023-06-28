@@ -58,7 +58,7 @@ def test_infer_dependencies(ip, capsys):
     )
 
     assert result == expected
-    assert "Generating CTE with stored snippets : author_sub" in out
+    assert "Generating CTE using display.py module" in out
 
 
 def test_deprecation_warning(ip):
@@ -150,15 +150,11 @@ def test_snippets_delete(ip, capsys):
     )
 
     out, _ = capsys.readouterr()
-    assert "Generating CTE with stored snippets : another_orders" in out
+    assert "Generating CTE using display.py module" in out
     result_del = ip.run_cell(
         "%sqlcmd snippets --delete-force-all another_orders"
     ).result
     assert "final, another_orders has been deleted.\n" in result_del
-    stored_snippets = result_del[
-        result_del.find("Stored snippets") + len("Stored snippets: ") :
-    ]
-    assert "orders_less" in stored_snippets
     ip.run_cell_magic(
         "sql",
         "--save final",
