@@ -78,7 +78,61 @@ def mock_resultset():
         def fetch_results(self, fetch_all=False):
             pass
 
+        @classmethod
+        def pie(self, key_word_sep=" ", title=None, **kwargs):
+            warnings.warn(
+                (
+                    ".pie() will be removed in a future version,"
+                    "please use %sqlplot pie. If you need help migrating,"
+                    "send us a message: https://ploomber.io/community"
+                )
+            )
+
+        @classmethod
+        def bar(self, key_word_sep=" ", title=None, **kwargs):
+            warnings.warn(
+                (
+                    ".bar() will be removed in a future version,"
+                    "please use %sqlplot bar. If you need help migrating,"
+                    "send us a message: https://ploomber.io/community"
+                )
+            )
+
+        @classmethod
+        def plot(self, key_word_sep=" ", title=None, **kwargs):
+            warnings.warn(
+                (
+                    ".plot() will be removed in a future version,"
+                    "If you need help migrating,"
+                    "send us a message: https://ploomber.io/community"
+                )
+            )
+
     return ResultSet
+
+
+def test_pie_warning(mock_resultset):
+    with warnings.catch_warnings(record=True) as warning_list:
+        rs = mock_resultset()
+        rs.pie()
+        rs.bar()
+        rs.plot()
+        assert len(warning_list) == 3
+        assert str(warning_list[0].message) == (
+            ".pie() will be removed in a future version,"
+            "please use %sqlplot pie. If you need help migrating,"
+            "send us a message: https://ploomber.io/community"
+        )
+        assert str(warning_list[1].message) == (
+            ".bar() will be removed in a future version,"
+            "please use %sqlplot bar. If you need help migrating,"
+            "send us a message: https://ploomber.io/community"
+        )
+        assert str(warning_list[2].message) == (
+            ".plot() will be removed in a future version,"
+            "If you need help migrating,"
+            "send us a message: https://ploomber.io/community"
+        )
 
 
 @pytest.mark.parametrize(
