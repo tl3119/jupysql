@@ -154,6 +154,23 @@ class ResultSet(ColumnGuesserMixin):
         else:
             return None
 
+    def _repr_text(self):
+        if self.pretty:
+            self.pretty.add_rows(self)
+            result = str(self.pretty)
+            if self.truncated:
+                result += (
+                    "\nTruncated to display limit of {}\n"
+                    "If you want to see more, please visit the "
+                    "displaylimit configuration at "
+                    "https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit".format(  # noqa: E501
+                        self.pretty.row_count
+                    )
+                )
+            return result
+        else:
+            return None
+
     def __len__(self):
         return len(self._results)
 
