@@ -111,28 +111,42 @@ def mock_resultset():
     return ResultSet
 
 
-def test_pie_warning(mock_resultset):
+@pytest.mark.parametrize(
+    "deprecated_warning",
+    [
+        (
+            "pie",
+            (
+                ".pie() will be removed in a future version,"
+                "please use %sqlplot pie. If you need help migrating,"
+                "send us a message: https://ploomber.io/community"
+            ),
+        ),
+        (
+            "bar",
+            (
+                ".bar() will be removed in a future version,"
+                "please use %sqlplot bar. If you need help migrating,"
+                "send us a message: https://ploomber.io/community"
+            ),
+        ),
+        (
+            "plot",
+            (
+                ".plot() will be removed in a future version,"
+                "If you need help migrating,"
+                "send us a message: https://ploomber.io/community"
+            ),
+        ),
+    ],
+)
+def test_pie_warning(mock_resultset, deprecated_warning):
+    func_name, expected_warning = deprecated_warning
     with warnings.catch_warnings(record=True) as warning_list:
         rs = mock_resultset()
-        rs.pie()
-        rs.bar()
-        rs.plot()
-        assert len(warning_list) == 3
-        assert str(warning_list[0].message) == (
-            ".pie() will be removed in a future version,"
-            "please use %sqlplot pie. If you need help migrating,"
-            "send us a message: https://ploomber.io/community"
-        )
-        assert str(warning_list[1].message) == (
-            ".bar() will be removed in a future version,"
-            "please use %sqlplot bar. If you need help migrating,"
-            "send us a message: https://ploomber.io/community"
-        )
-        assert str(warning_list[2].message) == (
-            ".plot() will be removed in a future version,"
-            "If you need help migrating,"
-            "send us a message: https://ploomber.io/community"
-        )
+        getattr(rs, func_name)()
+        assert len(warning_list) == 1
+        assert str(warning_list[0].message) == expected_warning
 
 
 @pytest.mark.parametrize(
