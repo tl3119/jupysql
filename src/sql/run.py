@@ -102,6 +102,27 @@ def _nonbreaking_spaces(match_obj):
 _cell_with_spaces_pattern = re.compile(r"(<td>)( {2,})")
 
 
+def _get_truncated_message(html=False) -> str:
+    if html:
+        return (
+            '%s\n<span style="font-style:italic;text-align:center;">'
+            "Truncated to displaylimit of %d</span>"
+            "<br>"
+            '<span style="font-style:italic;text-align:center;">'
+            "If you want to see more, please visit "
+            '<a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a>'  # noqa: E501
+            " configuration</span>"
+        )
+    else:
+        return (
+            "\n"
+            "Truncated to display limit of 10\n"
+            "If you want to see more, please visit the "
+            "displaylimit configuration at "
+            "https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit"
+        )
+
+
 class ResultSet(ColumnGuesserMixin):
     """
     Results of a SQL query.
@@ -140,33 +161,8 @@ class ResultSet(ColumnGuesserMixin):
             result = html.unescape(result)
             result = _cell_with_spaces_pattern.sub(_nonbreaking_spaces, result)
             if self.truncated:
-                HTML = (
-                    '%s\n<span style="font-style:italic;text-align:center;">'
-                    "Truncated to displaylimit of %d</span>"
-                    "<br>"
-                    '<span style="font-style:italic;text-align:center;">'
-                    "If you want to see more, please visit "
-                    '<a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a>'  # noqa: E501
-                    " configuration</span>"
-                )
+                HTML = _get_truncated_message(html=True)
                 result = HTML % (result, self.pretty.row_count)
-            return result
-        else:
-            return None
-
-    def _repr_text(self):
-        if self.pretty:
-            self.pretty.add_rows(self)
-            result = str(self.pretty)
-            if self.truncated:
-                result += (
-                    "\nTruncated to display limit of {}\n"
-                    "If you want to see more, please visit the "
-                    "displaylimit configuration at "
-                    "https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit".format(  # noqa: E501
-                        self.pretty.row_count
-                    )
-                )
             return result
         else:
             return None
@@ -186,6 +182,13 @@ class ResultSet(ColumnGuesserMixin):
         return str(self.pretty or "")
 
     def __repr__(self) -> str:
+        if self.pretty:
+            self.pretty.add_rows(self)
+            result = str(self.pretty)
+            if self.truncated:
+                message = _get_truncated_message()
+                result = f"{result} {message}"
+                return result
         return str(self)
 
     def __eq__(self, another: object) -> bool:

@@ -16,6 +16,7 @@ from sql.run import (
     select_df_type,
     set_autocommit,
     display_affected_rowcount,
+    _get_truncated_message,
 )
 
 
@@ -181,3 +182,22 @@ def test_commit_is_called(
     run(mock_conns, "\\", mock_config)
 
     mock__commit.assert_called()
+
+
+def test_get_truncated_message():
+    expected_text_message = "\nTruncated to display limit of 10\nIf you want to see more, please visit the displaylimit configuration at https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit"  # noqa: E501
+    expected_html_message = (
+        '%s\n<span style="font-style:italic;text-align:center;">'
+        "Truncated to displaylimit of %d</span>"
+        "<br>"
+        '<span style="font-style:italic;text-align:center;">'
+        "If you want to see more, please visit "
+        '<a href="https://jupysql.ploomber.io/en/latest/api/configuration.html#displaylimit">displaylimit</a>'  # noqa: E501
+        " configuration</span>"
+    )
+
+    text_message = _get_truncated_message(html=False)
+    assert text_message == expected_text_message
+
+    html_message = _get_truncated_message(html=True)
+    assert html_message == expected_html_message
